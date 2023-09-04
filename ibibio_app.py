@@ -3,6 +3,8 @@ import pickle
 import numpy as np
 import pandas as pd
 from ibom import make_prediction
+from english import trans_prediction
+from classify import make_class
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
 # text preprocessing modules
@@ -23,12 +25,17 @@ np.random.seed(123)
 # load stop words
 stop_words = stopwords.words("english")
 
-
+with open("class.pkl", "rb") as file:
+    class_model = pickle.load(file)
 
 with open("ibom.pkl", "rb") as file:
-    model = pickle.load(file)
+    ibibio_model = pickle.load(file)
 
-st.title('ENGLISH-AKWA IBOM LANGUAGES TRANSLATOR')
+with open("english.pkl", "rb") as file:
+    english_model = pickle.load(file)
+
+
+st.title('AKWA IBOM LANGUAGES TO ENGLISH LANGUAGE TRANSLATOR')
 @st.cache_data
 def load_data():
     return pd.read_csv('./ibibio.csv', encoding="unicode_escape")
@@ -40,30 +47,54 @@ if st.checkbox('Show raw data'):
     st.subheader('Raw data')
     st.write(df)
 
-st.sidebar.header("You are Welcome. Enter English Word or Sentence of Your Choice")
+st.sidebar.header("You are Welcome. Enter Akwa Ibom Word or Sentence of Your Choice")
 
 st.title("Translation")
-st.write("This is an English to Akwa Ibom Languages Translator")
+st.write("This is an Akwa Ibom Languages to English Language Translator")
 
 tf = TfidfVectorizer(min_df=0.0,stop_words='english')
 le = LabelEncoder()
 
 st.subheader("User Input")
 
-# Declare a form to receive a movie's review
-form = st.form(key="my_form")
-review = form.text_input(label="Enter your English Word(s)")
+def main():
+    # Declare a form to receive a movie's review
+    form = st.form(key="my_form")
+    review = form.text_input(label="Enter your Akwa Ibom Dialect Word(s)")
 
-if submit:= form.form_submit_button(label="Translation"):
+    if submit:= form.form_submit_button(label="Translation"):
+        _extracted_from_main_8(review)
+    form5 = st.form(key="english")
+    review5 = form5.text_input(label="Enter English Word(s)")
+    if submit:= form5.form_submit_button(label="Ibibio Translation"):
+        # make prediction from the input text
+        result5= trans_prediction(review5)
+        st.title("Ibibio Translation")
+        _extracted_from_main_15(result5, review5)
+
+
+# TODO Rename this here and in `main`
+def _extracted_from_main_8(review):
     # make prediction from the input text
     result = make_prediction(review)
+    # classify the word
+    trans = make_class(review)
     # Display results of the NLP task
     st.title("Translation")
     st.write(result)
+    st.title("Dialect")
+    _extracted_from_main_15(trans, review)
+
+
+# TODO Rename this here and in `main`
+def _extracted_from_main_15(arg0, arg1):
+    st.write(arg0)
     st.title("Use Cases")
-    mask = df.translation.str.contains(review)
-    st.write(df[["translation","dialect","(language/dialect)"]][mask])
-    
+    mask = df.dialect.str.contains(arg1)
+    st.write(df[["dialect","translation","(language/dialect)"]][mask])
+
+if __name__ == '__main__':
+    main()
     
 st.title("Add Word or Sentence to Database")
 form2 = st.form(key="new_words")
