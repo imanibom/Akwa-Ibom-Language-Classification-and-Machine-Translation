@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import seaborn as sns
 from sklearn.feature_extraction.text import CountVectorizer
+from collections import Counter
 
 
 
@@ -102,31 +103,6 @@ def _extracted_from_main_15(arg0, arg1):
 
 if __name__ == '__main__':
     main()
-    
-st.title("Add Word or Sentence to Database")
-form2 = st.form(key="new_words")
-review2 = form2.text_input(label="Enter English Word or Sentence")
-
-if submit2:= form2.form_submit_button(label="Add Translation"):
-    st.write(review2)
-form3 = st.form(key="translate")
-review3 = form3.text_input(label="Enter Translation")
-if submit3:= form3.form_submit_button(label="Enter language/Dialect"):
-    st.write(review3)
-form4 = st.form(key="language_dialect")
-review4 = form4.text_input(label="Enter Language/Dialect")
-if submit4:= form4.form_submit_button(label="Added language/Dialect"):
-    st.write(review4)
-# Concat dataframes
-# Define the new row to be added
-t2 = review2
-t3 = review3
-t4 = review4
-new_row = pd.DataFrame([{"dialect": t3,"translation": t2, "(language/dialect)": t4}])    
-# Use the loc method to add the new row to the DataFrame
-df = pd.concat([df, new_row], ignore_index= True)
-# saving the dataframe
-df.to_csv('./ibom.csv')
 
 # Exploring our class description - the categorical variable lang_id
 st.title("Explore Data")
@@ -141,3 +117,51 @@ if st.button("Word Cloud"):
     plt.imshow(w)
     plt.axis('off')
     st.pyplot()
+
+st.subheader("Word Frequency")
+if st.button("Word Frequency"):
+    counts = dict(Counter(ls).most_common(20))
+    labels, values = zip(*counts.items())
+
+    # sort your values in descending order
+    indSort = np.argsort(values)[::-1]
+
+    # rearrange your data
+    labels = np.array(labels)[indSort]
+    values = np.array(values)[indSort]
+
+    indexes = np.arange(len(labels))
+
+    bar_width = 0.1
+
+    plt.barh(values, indexes)
+
+    # add labels
+    plt.yticks(indexes + bar_width, labels)
+    st.pyplot()
+    
+st.title("ADD NEW WORDS OR SENTENCE")
+if st.button("Add Word or Sentence to Database"):
+    form2 = st.form(key="new_words")
+    review2 = form2.text_input(label="Enter English Word or Sentence")
+
+    if submit2:= form2.form_submit_button(label="Add Translation"):
+        st.write(review2)
+    form3 = st.form(key="translate")
+    review3 = form3.text_input(label="Enter Translation")
+    if submit3:= form3.form_submit_button(label="Enter language/Dialect"):
+        st.write(review3)
+    form4 = st.form(key="language_dialect")
+    review4 = form4.text_input(label="Enter Language/Dialect")
+    if submit4:= form4.form_submit_button(label="Added language/Dialect"):
+        st.write(review4)
+    # Concat dataframes
+    # Define the new row to be added
+    t2 = review2
+    t3 = review3
+    t4 = review4
+    new_row = pd.DataFrame([{"dialect": t3,"translation": t2, "(language/dialect)": t4}])    
+    # Use the loc method to add the new row to the DataFrame
+    df = pd.concat([df, new_row], ignore_index= True)
+    # saving the dataframe
+    df.to_csv('./ibom.csv')
