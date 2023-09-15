@@ -129,43 +129,15 @@ df = pd.concat([df, new_row], ignore_index= True)
 df.to_csv('./ibom.csv')
 
 # Exploring our class description - the categorical variable lang_id
-st.title("Exploring Dialects")
-type_labels = list(df['(language/dialect)'].unique())
-
-df['(language/dialect)'].value_counts().plot(
-    kind = 'bar', 
-    color=['green','blue','black','steelblue','purple',
-           'indigo'])
-plt.xlabel('(language/dialect)')
-plt.ylabel('Number')
-st.write(plt.show())
-st.write('Number of Represented Dialects')
-
-def word_cloud(df):
-    
-    word_vect = CountVectorizer(stop_words = 'english')
-    keywords = word_vect.fit_transform(df.dialect)
-    total_words = keywords.sum(axis=0)
-
-    keywords_freq = [(keyword, total_words[0, i]) for keyword, i in word_vect.vocabulary_.items()]
-    keywords_freq = sorted(keywords_freq, key = lambda x: x[1], reverse = True)
-    #frequency = pd.DataFrame(keywords_freq, columns=['keyword', 'freq'])
-
-    kw_cloud = WordCloud(width=600, 
-                     height=400, 
-                     random_state=2, 
-                     max_font_size=100).generate(str(keywords_freq))
-    
-    x, y = np.ogrid[:300, :300]
-    mask = (x - 160) ** 2 + (y - 160) ** 2 > 170 ** 2
-    mask = 255 * mask.astype(int)
-
-    plt.figure(figsize=(10,8))
-    b = plt.imshow(kw_cloud, interpolation='bilinear')
-    plt.axis("off")
-    plt.title(fontsize = 20)
-
-    return b
-
-st.write(word_cloud(df))
-st.write('Common Words')
+st.title("Explore Data")
+st.subheader("Word Cloud")
+st.set_option('deprecation.showPyplotGlobalUse', False)
+ls = df.dialect.tolist()
+mystr = " "
+for x in ls:
+    mystr += " " + x
+if st.button("Word Cloud"):
+    w=WordCloud().generate(mystr)
+    plt.imshow(w)
+    plt.axis('off')
+    st.pyplot()
