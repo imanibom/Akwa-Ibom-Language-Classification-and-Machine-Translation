@@ -163,7 +163,7 @@ def word_cloud(df):
     plt.figure(figsize=(10,8))
     b = plt.imshow(kw_cloud, interpolation='bilinear')
     plt.axis("off")
-    plt.title(label, fontsize = 20)
+    plt.title(fontsize = 20)
 
     return b
 
