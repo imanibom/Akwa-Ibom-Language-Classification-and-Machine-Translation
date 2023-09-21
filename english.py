@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import re
+import nltk
+nltk.download('punkt')
 from nltk import WordNetLemmatizer
 from nltk import stopwords  
 from sklearn.feature_extraction.text import TfidfVectorizer
