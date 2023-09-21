@@ -12,6 +12,7 @@ from string import punctuation
 # text preprocessing modules
 from nltk.tokenize import word_tokenize
 import nltk
+nltk.download('punkt')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import re  # regular expression
