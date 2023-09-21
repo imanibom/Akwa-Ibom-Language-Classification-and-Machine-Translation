@@ -8,19 +8,16 @@ from classify import make_class
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
 # text preprocessing modules
-from string import punctuation
 # text preprocessing modules
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 from nltk.corpus import stopwords
-import re  # regular expression
 import warnings
 # visualiztion tools
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import seaborn as sns
 from collections import Counter
 
 
