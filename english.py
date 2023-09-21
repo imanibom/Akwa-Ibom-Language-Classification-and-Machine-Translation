@@ -3,8 +3,9 @@ import numpy as np
 import re
 import nltk
 nltk.download('punkt')
+nltk.download('stopwords')
+from nltk.corpus import stopwords
 from nltk import WordNetLemmatizer
-from nltk import stopwords  
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder, label_binarize
 from sklearn.linear_model import SGDClassifier
