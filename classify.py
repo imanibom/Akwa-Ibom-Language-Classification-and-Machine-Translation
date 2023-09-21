@@ -4,6 +4,7 @@ import re
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
+nltk.download('wordnet')
 from nltk.corpus import stopwords
 from nltk import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
