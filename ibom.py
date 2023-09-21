@@ -5,11 +5,10 @@ import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 from nltk.corpus import stopwords
-from nltk import WordNetLemmatizer 
+from nltk import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder, label_binarize
 from sklearn.linear_model import SGDClassifier
-from collections import Counter
 from sklearn.model_selection import train_test_split
 import pickle
 
