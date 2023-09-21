@@ -10,17 +10,14 @@ from sklearn.preprocessing import LabelEncoder
 # text preprocessing modules
 from string import punctuation
 # text preprocessing modules
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
+import nltk_download_utils
+from nltk_download_utils import stopwords
 import re  # regular expression
-import joblib
 import warnings
 # visualiztion tools
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import seaborn as sns
-from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
 
 

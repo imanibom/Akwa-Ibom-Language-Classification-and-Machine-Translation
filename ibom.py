@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import re
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords  
+from nltk_download_utils import WordNetLemmatizer
+from nltk_download_utils import stopwords  
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder, label_binarize
 from sklearn.linear_model import SGDClassifier
