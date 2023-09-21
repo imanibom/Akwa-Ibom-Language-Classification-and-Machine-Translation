@@ -11,8 +11,7 @@ from sklearn.preprocessing import LabelEncoder
 from string import punctuation
 # text preprocessing modules
 import nltk
-nltk.download('punct')
-from nltk_download_utils import stopwords
+from nltk import stopwords
 import re  # regular expression
 import warnings
 # visualiztion tools

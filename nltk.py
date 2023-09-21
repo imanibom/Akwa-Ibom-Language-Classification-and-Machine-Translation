@@ -1,0 +1,3 @@
+wordnet
+punkt
+all-corpora
