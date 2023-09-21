@@ -1,3 +1,5 @@
+visit: https://imanibom-akwa-ibom-language-classification-an-ibibio-app-jegcb1.streamlit.app/
+
 Launching the Streamlit Application
 
 The dataset (ibibio.csv) and the three python scripts (classify.py, ibom.py and ibibio_app.py) must be in the same folder (you can create an empty folder for this). Then follow the following steps;
