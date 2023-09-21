@@ -10,7 +10,8 @@ from sklearn.preprocessing import LabelEncoder
 # text preprocessing modules
 from string import punctuation
 # text preprocessing modules
-import nltk_download_utils
+import nltk
+nltk.download('punct')
 from nltk_download_utils import stopwords
 import re  # regular expression
 import warnings
