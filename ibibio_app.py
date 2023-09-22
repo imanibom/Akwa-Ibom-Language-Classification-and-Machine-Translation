@@ -140,15 +140,15 @@ st.title("ADD NEW WORDS OR SENTENCE")
 if st.button("Add Word or Sentence to Database"):
     form2 = st.form(key="new_words")
     review2 = form2.text_input(label="Enter English Word or Sentence")
+    form3 = st.form(key="translate")
+    review3 = form3.text_input(label="Enter Translation")
+    form4 = st.form(key="language_dialect")
+    review4 = form4.text_input(label="Enter Language/Dialect")
 
     if submit2:= form2.form_submit_button(label="Add Translation"):
         st.write(review2)
-    form3 = st.form(key="translate")
-    review3 = form3.text_input(label="Enter Translation")
     if submit3:= form3.form_submit_button(label="Enter language/Dialect"):
         st.write(review3)
-    form4 = st.form(key="language_dialect")
-    review4 = form4.text_input(label="Enter Language/Dialect")
     if submit4:= form4.form_submit_button(label="Added language/Dialect"):
         st.write(review4)
     # Concat dataframes
