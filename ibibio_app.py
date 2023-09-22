@@ -144,20 +144,23 @@ if st.button("Add Word or Sentence to Database"):
     review3 = form3.text_input(label="Enter Translation")
     form4 = st.form(key="language_dialect")
     review4 = form4.text_input(label="Enter Language/Dialect")
-
+            
     if submit2:= form2.form_submit_button(label="Add Translation"):
         st.write(review2)
+    
     if submit3:= form3.form_submit_button(label="Enter language/Dialect"):
         st.write(review3)
+        
     if submit4:= form4.form_submit_button(label="Added language/Dialect"):
         st.write(review4)
-    # Concat dataframes
-    # Define the new row to be added
-    t2 = review2
-    t3 = review3
-    t4 = review4
-    new_row = pd.DataFrame([{"dialect": t3,"translation": t2, "(language/dialect)": t4}])    
-    # Use the loc method to add the new row to the DataFrame
-    df = pd.concat([df, new_row], ignore_index= True)
-    # saving the dataframe
-    df.to_csv('./ibom.csv')
+        
+        # Concat dataframes
+        # Define the new row to be added
+        t2 = review2
+        t3 = review3
+        t4 = review4
+        new_row = pd.DataFrame([{"dialect": t3,"translation": t2, "(language/dialect)": t4}])    
+        # Use the loc method to add the new row to the DataFrame
+        df = pd.concat([df, new_row], ignore_index= True)
+        # saving the dataframe
+        df.to_csv('./ibom.csv')
