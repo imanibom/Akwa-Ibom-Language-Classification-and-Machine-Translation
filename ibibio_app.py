@@ -7,26 +7,19 @@ from english import trans_prediction
 from classify import make_class
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
-# text preprocessing modules
-# text preprocessing modules
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 from nltk.corpus import stopwords
 import warnings
-# visualiztion tools
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from collections import Counter
 
-
-
 warnings.filterwarnings("ignore")
-# seeding
 np.random.seed(123)
 
-# load stop words
 stop_words = stopwords.words("english")
 
 with open("class.pkl", "rb") as file:
@@ -38,13 +31,12 @@ with open("ibom.pkl", "rb") as file:
 with open("english.pkl", "rb") as file:
     english_model = pickle.load(file)
 
-
 st.title('AKWA IBOM LANGUAGES TO ENGLISH LANGUAGE TRANSLATOR')
+
 @st.cache_data
 def load_data():
     return pd.read_csv('./ibibio.csv', encoding="unicode_escape")
 
-# Data loading and Processing
 df = load_data()
 
 if st.checkbox('Show raw data'):
@@ -62,35 +54,28 @@ le = LabelEncoder()
 st.subheader("User Input")
 
 def main():
-    # Declare a form to receive a movie's review
     form = st.form(key="my_form")
     review = form.text_input(label="Enter your Akwa Ibom Dialect Word(s)")
 
     if submit:= form.form_submit_button(label="Translation"):
         _extracted_from_main_8(review)
+    
     form5 = st.form(key="english")
     review5 = form5.text_input(label="Enter English Word(s)")
+    
     if submit:= form5.form_submit_button(label="Ibibio Translation"):
-        # make prediction from the input text
         result5= trans_prediction(review5)
         st.title("Ibibio Translation")
         _extracted_from_main_15(result5, review5)
 
-
-# TODO Rename this here and in `main`
 def _extracted_from_main_8(review):
-    # make prediction from the input text
     result = make_prediction(review)
-    # classify the word
     trans = make_class(review)
-    # Display results of the NLP task
     st.title("Translation")
     st.write(result)
     st.title("Dialect")
     _extracted_from_main_15(trans, review)
 
-
-# TODO Rename this here and in `main`
 def _extracted_from_main_15(arg0, arg1):
     st.write(arg0)
     st.title("Use Cases")
@@ -100,7 +85,6 @@ def _extracted_from_main_15(arg0, arg1):
 if __name__ == '__main__':
     main()
 
-# Exploring our class description - the categorical variable lang_id
 st.title("Explore Data")
 st.subheader("Word Cloud")
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -108,6 +92,7 @@ ls = df.dialect.tolist()
 mystr = " "
 for x in ls:
     mystr += " " + x
+
 if st.button("Word Cloud"):
     w=WordCloud().generate(mystr)
     plt.imshow(w)
@@ -118,49 +103,26 @@ st.subheader("Word Frequency")
 if st.button("Word Frequency"):
     counts = dict(Counter(ls).most_common(20))
     labels, values = zip(*counts.items())
-
-    # sort your values in descending order
     indSort = np.argsort(values)[::-1]
-
-    # rearrange your data
     labels = np.array(labels)[indSort]
     values = np.array(values)[indSort]
-
     indexes = np.arange(len(labels))
-
     bar_width = 0.1
-
     plt.barh(values, indexes)
-
-    # add labels
     plt.yticks(indexes + bar_width, labels)
     st.pyplot()
-    
+
 st.title("ADD NEW WORDS OR SENTENCE")
-if st.button("Add Word or Sentence to Database"):
-    form2 = st.form(key="new_words")
-    review2 = form2.text_input(label="Enter English Word or Sentence")
-    form3 = st.form(key="translate")
-    review3 = form3.text_input(label="Enter Translation")
-    form4 = st.form(key="language_dialect")
-    review4 = form4.text_input(label="Enter Language/Dialect")
-            
-    if submit2:= form2.form_submit_button(label="Add Translation"):
-        st.write(review2)
-    
-    if submit3:= form3.form_submit_button(label="Enter language/Dialect"):
-        st.write(review3)
-        
-    if submit4:= form4.form_submit_button(label="Added language/Dialect"):
-        st.write(review4)
-        
-        # Concat dataframes
-        # Define the new row to be added
-        t2 = review2
-        t3 = review3
-        t4 = review4
-        new_row = pd.DataFrame([{"dialect": t3,"translation": t2, "(language/dialect)": t4}])    
-        # Use the loc method to add the new row to the DataFrame
-        df = pd.concat([df, new_row], ignore_index= True)
-        # saving the dataframe
-        df.to_csv('./ibom.csv')
+
+@st.cache_data()
+def get_data():
+    return []
+
+t2 = st.text_input("Enter English Word or Sentence")
+t3 = st.text_input("Enter Translation")
+t4 = st.text_input("Enter Akwa Ibom Dialect")
+
+if st.button("Add row"):
+    new_row = get_data().append({"dialect": t3,"translation": t2, "(language/dialect)": t4})
+    df = pd.concat([df, new_row], ignore_index= True)
+    df.to_csv('./ibom.csv')
