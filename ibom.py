@@ -39,12 +39,12 @@ y = le.fit_transform(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,random_state=100,test_size=0.2)
 
-tf = TfidfVectorizer(ngram_range=(1, 3),min_df=0.0,stop_words='english')
+tf = TfidfVectorizer(ngram_range=(1, 50),min_df=0.0,stop_words='english')
 
 X_train_tf = tf.fit_transform(X_train)
 X_test_tf = tf.transform(X_test)
 
-model = SGDClassifier(n_jobs=-1,random_state=100,loss='modified_huber',alpha=0.0005)
+model = SGDClassifier(n_jobs=-1,random_state=100,loss='modified_huber',alpha=0.05)
 
 model.fit(X_train_tf,y_train)
 
