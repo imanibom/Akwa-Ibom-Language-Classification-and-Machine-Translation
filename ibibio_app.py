@@ -80,7 +80,7 @@ def _extracted_from_main_8(review):
 def _extracted_from_main_15(arg0, arg1):
     st.write(arg0)
     st.title("Use Cases")
-    mask = df.dialect.str.contains(arg1)
+    mask = df.str.contains(arg1)
     st.write(df[["dialect","translation","(language/dialect)"]][mask])
 
 if __name__ == '__main__':
