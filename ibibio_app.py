@@ -121,10 +121,10 @@ t3 = st.text_input("Enter Translation")
 st.write(t3)
 t4 = st.text_input("Enter Akwa Ibom Dialect")
 st.write(t4)
-new_row = pd.DataFrame({"dialect": [t3],"translation": [t2], "(language/dialect)": [t4]})
-st.write(new_row)
 
 if st.button("Add New Words"):
+    new_row = pd.DataFrame({"dialect": [t3],"translation": [t2], "(language/dialect)": [t4]})
+    st.write(new_row)
     df = pd.concat([df, new_row], ignore_index= True)
 
 df.to_csv('./ibom.csv')
