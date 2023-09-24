@@ -126,6 +126,5 @@ st.write(new_row)
 
 if st.button("Add New Words"):
     df = pd.concat([df, new_row], ignore_index= True)
-    df.to_csv('./ibom.csv')
-    
-time.sleep(10)
+
+df.to_csv('./ibom.csv')
