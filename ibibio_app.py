@@ -67,7 +67,7 @@ def main():
     if submit:= form5.form_submit_button(label="Ibibio Translation"):
         result5= trans_prediction(review5)
         st.title("Ibibio Translation")
-        _extracted_from_main_15(result5, review5)
+        _extracted_from_main_15(review5, result5)
 
 def _extracted_from_main_8(review):
     result = make_prediction(review)
