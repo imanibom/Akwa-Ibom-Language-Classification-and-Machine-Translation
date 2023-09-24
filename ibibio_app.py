@@ -124,6 +124,6 @@ st.write(t4)
 if st.button("Add New Words"):
     new_row = pd.DataFrame({"dialect": [t3],"translation": [t2], "(language/dialect)": [t4]})
     st.write(new_row)
-    df = pd.concat([df, new_row], ignore_index= True)
+    df = pd.concat([df, new_row], ignore_index= False)
 
 df.to_csv('./ibom.csv')
