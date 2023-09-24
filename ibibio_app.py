@@ -113,16 +113,13 @@ if st.button("Word Frequency"):
     st.pyplot()
 
 st.title("ADD NEW WORDS OR SENTENCE")
-
-@st.cache_data()
-def get_data():
-    return []
-
 t2 = st.text_input("Enter English Word or Sentence")
+st.write(t2)
 t3 = st.text_input("Enter Translation")
+st.write(t3)
 t4 = st.text_input("Enter Akwa Ibom Dialect")
-
-if st.button("Add row"):
-    new_row = get_data().append({"dialect": t3,"translation": t2, "(language/dialect)": t4})
-    df = pd.concat([df, new_row], ignore_index= True)
-    df.to_csv('./ibom.csv')
+st.write(t4)
+new_row = pd.DataFrame({"dialect": [t3],"translation": [t2], "(language/dialect)": [t4]})
+st.write(new_row)
+df = pd.concat([df, new_row], ignore_index= True)
+df.to_csv('./ibom.csv')
