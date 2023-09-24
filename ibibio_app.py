@@ -1,3 +1,4 @@
+import time
 import streamlit as st
 import pickle
 import numpy as np
@@ -126,3 +127,5 @@ st.write(new_row)
 if st.button("Add New Words"):
     df = pd.concat([df, new_row], ignore_index= True)
     df.to_csv('./ibom.csv')
+
+time.sleep(10)
