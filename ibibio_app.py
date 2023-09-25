@@ -125,10 +125,10 @@ st.write(t4)
 if st.button("Add New Words"):
     new_row = pd.DataFrame({"dialect": [t3],"translation": [t2], "(language/dialect)": [t4]})
     st.write(new_row)
-    df = pd.concat([df, new_row], ignore_index= True)
+    #df = pd.concat([df, new_row], ignore_index= True)
 
 # Generate a random string
 random_string = str(uuid.uuid4())
 
 # Save the file with the random string name
-df.to_csv(f'./{random_string[:4]}.csv')
+new_row.to_csv(f'./{random_string[:4]}.csv')
