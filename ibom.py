@@ -39,7 +39,7 @@ le = LabelEncoder()
 
 y = le.fit_transform(y)
 
-X_train, X_test, y_train, y_test = train_test_split(X,y,random_state=100,test_size=0.1)
+X_train, X_test, y_train, y_test = train_test_split(X,y,random_state=100,test_size=0.3)
 
 tf = TfidfVectorizer(ngram_range=(1, 50),min_df=0.0,stop_words='english')
 
