@@ -52,7 +52,7 @@ st.sidebar.header("You are Welcome. Enter Akwa Ibom Word or Sentence of Your Cho
 st.title("Translation")
 st.write("This is an Akwa Ibom Languages to English Language Translator")
 
-tf = TfidfVectorizer(min_df=0.0,stop_words='english')
+tf = TfidfVectorizer(ngram_range=(1,50),min_df=0.0,stop_words='english')
 le = LabelEncoder()
 
 st.subheader("User Input")
@@ -70,6 +70,7 @@ def main():
     if submit:= form5.form_submit_button(label="Ibibio Translation"):
         result5= trans_prediction(review5)
         st.title("Ibibio Translation")
+        st.write(result5)
         _extracted_from_main_15(review5, result5)
 
 def _extracted_from_main_8(review):
@@ -81,7 +82,6 @@ def _extracted_from_main_8(review):
     _extracted_from_main_15(trans, review)
 
 def _extracted_from_main_15(arg0, arg1):
-    st.write(arg0)
     st.title("Use Cases")
     mask = df.dialect.str.contains(arg1)
     st.write(df[["dialect","translation","(language/dialect)"]][mask])
