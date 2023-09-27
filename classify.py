@@ -15,6 +15,7 @@ import pickle
 
 # Data loading and Processing
 df = pd.read_csv('./ibibio.csv', encoding="unicode_escape")
+df = df.astype(str)
 
 stop_words=stopwords.words('english')
 lemmatizer = WordNetLemmatizer()
