@@ -23,7 +23,7 @@ lemmatizer = WordNetLemmatizer()
 
 def clean_data(text):
     text=text.lower() #lower the text
-    text = re.sub(r'[^\w\s]', '', text) #remove irrelevant characters    
+    #text = re.sub(r'[^\w\s]', '', text) #remove irrelevant characters    
     text = text.split() #convert sentence to tokens
     text = [lemmatizer.lemmatize(word) for word in text] #lemmatization
     text = " ".join(text) #converting tokens to sentence
