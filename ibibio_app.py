@@ -38,12 +38,15 @@ st.title('AKWA IBOM LANGUAGES TO ENGLISH LANGUAGE TRANSLATOR')
 def load_data():
     return pd.read_csv('./ibibio.csv', encoding="unicode_escape")
 
-df = load_data()
+cache_df = load_data()
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
-    st.write(df)
+    st.write(cache_df)
 
+df = pd.read_csv('./ibibio.csv', encoding="unicode_escape")
+df = df.astype(str)
+df = df.dropna()
 st.sidebar.header("You are Welcome. Enter Akwa Ibom Word or Sentence of Your Choice")
 
 st.title("Translation")
@@ -127,8 +130,8 @@ if st.button("Add New Words"):
     st.write(new_row)
     #df = pd.concat([df, new_row], ignore_index= True)
 
-# Generate a random string
-random_string = str(uuid.uuid4())
+    # Generate a random string
+    random_string = str(uuid.uuid4())
 
-# Save the file with the random string name
-new_row.to_csv(f'./{random_string[:4]}.csv')
+    # Save the file with the random string name
+    new_row.to_csv(f'./{random_string[:4]}.csv')
