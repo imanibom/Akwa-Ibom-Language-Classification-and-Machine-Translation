@@ -71,7 +71,7 @@ def main():
         result5= trans_prediction(review5)
         st.title("Ibibio Translation")
         st.write(result5)
-        _extracted_from_main_15(result5)
+        _extracted_from_main_15(review5)
 
 def _extracted_from_main_8(review):
     result = make_prediction(review)
