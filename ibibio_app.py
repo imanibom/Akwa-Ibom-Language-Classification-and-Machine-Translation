@@ -71,7 +71,7 @@ def main():
         result5= trans_prediction(review5)
         st.title("Ibibio Translation")
         st.write(result5)
-        _extracted_from_main_15(review5, result5)
+        _extracted_from_main_15(result5)
 
 def _extracted_from_main_8(review):
     result = make_prediction(review)
@@ -79,9 +79,10 @@ def _extracted_from_main_8(review):
     st.title("Translation")
     st.write(result)
     st.title("Dialect")
-    _extracted_from_main_15(trans, review)
+    st.write(trans)
+    _extracted_from_main_15(review)
 
-def _extracted_from_main_15(arg0, arg1):
+def _extracted_from_main_15(arg1):
     st.title("Use Cases")
     mask = df.dialect.str.contains(arg1)
     st.write(df[["dialect","translation","(language/dialect)"]][mask])
